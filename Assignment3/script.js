@@ -6,6 +6,7 @@ checked();
 let boolean = true;
 let check = true;
 function checked() {
+  sum = 0;
   for (let i = 0; i < checkboxR.length; i++) {
     const row = checkboxR[i].parentNode.parentNode;
     checkboxR[i].addEventListener("click", () => {
@@ -29,6 +30,7 @@ function checked() {
         row.querySelectorAll("td")[9].classList.remove("hideColumn");
 
       }
+      updateButtonState();
     })
   }
 }
@@ -42,6 +44,7 @@ function deleteRow(row) {
   document.querySelectorAll("tr")[0].querySelectorAll("th")[9].classList.add("hideColumn");
   console.log("delete row" + sum)
   console.log("clength:" + checkboxR.length);
+  sum--;
   configure();
   checked();
 }
@@ -182,6 +185,23 @@ function displayDetails(r) {
   } else {
     d.style.display = "none";
     boolean = true;
+  }
+}
+
+function updateButtonState() {
+  let btnSelect = document.getElementById("button");
+
+  if (sum <= 0) {
+    btnSelect.style.backgroundColor = "gray";
+    btnSelect.style.cursor = "initial";
+    btnSelect.style.border = "5px solid gray";
+    btnSelect.style.border = "none";
+    btnSelect.disabled = true;
+  } else {
+    btnSelect.style.backgroundColor = "orange";
+    btnSelect.style.cursor = "pointer";
+    btnSelect.style.border = "5px solid orange";
+    btnSelect.disabled = false;
   }
 }
 
